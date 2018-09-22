@@ -35,8 +35,12 @@ class Vector(object):
         return sqrt(sum((x**2 for x in self.coordinates)))
 
     def normalization(self):
-        mag = self.magnitude()
-        return tuple((1/mag*x for x in self.coordinates))
+        try:
+            mag = self.magnitude()
+            self.scalar_multiply(1./mag)
+            return self
+        except ZeroDivisionError:
+            print("Cannot normalize the zero vector.")
 
 
 if __name__ == '__main__':
