@@ -1,3 +1,5 @@
+from math import sqrt
+
 class Vector(object):
     def __init__(self, coordinates):
         try:
@@ -28,7 +30,14 @@ class Vector(object):
                                   zip(self.coordinates, v.coordinates)))
     def scalar_multiply(self, s):
         self.coordinates = tuple((x*s for x in self.coordinates))
-        
+
+    def magnitude(self):
+        return sqrt(sum((x**2 for x in self.coordinates)))
+
+    def normalization(self):
+        mag = self.magnitude()
+        return tuple((1/mag*x for x in self.coordinates))
+
 
 if __name__ == '__main__':
     vector_1 = Vector((8.218,-9.341))
@@ -50,3 +59,13 @@ if __name__ == '__main__':
     print("Vector 5 times scalar 1:")
     vector_5.scalar_multiply(scalar_1)
     print(vector_5)
+
+    vector_6_1 = Vector((-0.221, 7.437))
+    print("vector_6_1.magnitude: " + str(round(vector_6_1.magnitude(),3)))
+    vector_6_2 = Vector((8.813, -1.331, -6.247))
+    print("vector_6_2.magnitude: " + str(round(vector_6_2.magnitude(),3)))
+
+    vector_6_3 = Vector((5.581, -2.136))
+    print("vector_6_3.normalization(): " + str(vector_6_3.normalization()))
+    vector_6_4 = Vector((1.996, 3.108, -4.554))
+    print("vector_6_4.normalization(): " + str(vector_6_4.normalization()))
